@@ -7,6 +7,8 @@ var connectionString = builder.Configuration.GetConnectionString("ProdutoConnect
 
 builder.Services.AddDbContext<ProdutoContext>(options => options.UseMySql(connectionString
     , ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
 
 builder.Services.AddControllers();

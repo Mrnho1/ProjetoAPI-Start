@@ -52,3 +52,5 @@ C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\System.Text.
 C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\MySqlConnector.dll
 C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\USER\source\repos\ProdutosAPI\ProdutosAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
