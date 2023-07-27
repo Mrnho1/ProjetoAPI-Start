@@ -6,7 +6,7 @@ public class Produto
 {
     [Key]
     [Required]
-    public int id_produto { get; set; }
+    public int id { get; set; }
     [Required(ErrorMessage = "O nome do produto é essencialmente obrigatório!!")]
     [MaxLength(50, ErrorMessage ="O nome do produto não deve exceder 50 caracteres")]
     public string nome_produto { get; set; }

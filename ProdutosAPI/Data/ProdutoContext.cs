@@ -3,12 +3,14 @@ using ProdutosAPI.Models;
 
 namespace ProdutosAPI.Data;
 
-public class ProdutoContext : DbContext
+public class PedidoContext : DbContext
 {
-    public ProdutoContext(DbContextOptions<ProdutoContext> options) : base(options)
+    public PedidoContext(DbContextOptions<PedidoContext> options) : base(options)
     {
 
     } 
      public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Cliente> Clientes { get; set;}
+    public DbSet<Pedido> Pedidos { get; set; }
 }
 

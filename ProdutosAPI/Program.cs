@@ -5,8 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ProdutoConnection");
 
-builder.Services.AddDbContext<ProdutoContext>(options => options.UseMySql(connectionString
-    , ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<PedidoContext>(options => options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
