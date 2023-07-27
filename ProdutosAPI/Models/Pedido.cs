@@ -12,4 +12,9 @@ public class Pedido
 
     public float valor_total { get; set; }
 
+    [Required]
+    public int clienteId { get; set; }
+    public virtual Cliente Cliente { get; set; }
+
+
 }

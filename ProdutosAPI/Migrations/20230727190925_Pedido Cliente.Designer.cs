@@ -11,8 +11,8 @@ using ProdutosAPI.Data;
 namespace ProdutosAPI.Migrations
 {
     [DbContext(typeof(PedidoContext))]
-    [Migration("20230727183333_Tabelas")]
-    partial class Tabelas
+    [Migration("20230727190925_Pedido Cliente")]
+    partial class PedidoCliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,9 @@ namespace ProdutosAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("clienteId")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly>("data_pedido")
                         .HasColumnType("date");
 
@@ -57,6 +60,8 @@ namespace ProdutosAPI.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("id");
+
+                    b.HasIndex("clienteId");
 
                     b.ToTable("Pedidos");
                 });
@@ -82,6 +87,22 @@ namespace ProdutosAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Produtos");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
+                {
+                    b.HasOne("ProdutosAPI.Models.Cliente", "Cliente")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("clienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>
+                {
+                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }

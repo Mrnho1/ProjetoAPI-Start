@@ -12,5 +12,6 @@ namespace ProdutosAPI.Models
 
         public string endereco_cliente { get; set;}
 
+        public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }
