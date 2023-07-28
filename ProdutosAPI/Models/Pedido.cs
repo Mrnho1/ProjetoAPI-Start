@@ -16,5 +16,7 @@ public class Pedido
     public int clienteId { get; set; }
     public virtual Cliente Cliente { get; set; }
 
+    public virtual ICollection<Item> Item_Produtos { get; set; }
+
 
 }

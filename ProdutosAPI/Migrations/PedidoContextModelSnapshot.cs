@@ -9,7 +9,7 @@ using ProdutosAPI.Data;
 
 namespace ProdutosAPI.Migrations
 {
-    [DbContext(typeof(PedidoContext))]
+    [DbContext(typeof(ItemContext))]
     partial class PedidoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -39,6 +39,27 @@ namespace ProdutosAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Item", b =>
+                {
+                    b.Property<int?>("pedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("produtoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("qtd_pedido")
+                        .HasColumnType("int");
+
+                    b.Property<float>("valor_item")
+                        .HasColumnType("float");
+
+                    b.HasKey("pedidoId", "produtoId");
+
+                    b.HasIndex("produtoId");
+
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
@@ -86,6 +107,25 @@ namespace ProdutosAPI.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("ProdutosAPI.Models.Item", b =>
+                {
+                    b.HasOne("ProdutosAPI.Models.Pedido", "Pedido")
+                        .WithMany("Item_Produtos")
+                        .HasForeignKey("pedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProdutosAPI.Models.Produto", "Produto")
+                        .WithMany("Item_Produtos")
+                        .HasForeignKey("produtoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
                 {
                     b.HasOne("ProdutosAPI.Models.Cliente", "Cliente")
@@ -100,6 +140,16 @@ namespace ProdutosAPI.Migrations
             modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
+                {
+                    b.Navigation("Item_Produtos");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Produto", b =>
+                {
+                    b.Navigation("Item_Produtos");
                 });
 #pragma warning restore 612, 618
         }

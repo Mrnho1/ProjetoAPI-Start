@@ -10,10 +10,10 @@ namespace ProdutosAPI.Controllers;
 [Route("[controller]")]
 public class ClienteController : ControllerBase
 {
-    private PedidoContext _context;
+    private ItemContext _context;
     private IMapper _mapper;
 
-    public ClienteController(PedidoContext context, IMapper mapper)
+    public ClienteController(ItemContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

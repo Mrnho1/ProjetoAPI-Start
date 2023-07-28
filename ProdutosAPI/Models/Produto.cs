@@ -16,4 +16,7 @@ public class Produto
 
     public string categoria { get; set; }
 
+    public virtual ICollection<Item> Item_Produtos { get; set; }
+
+
 }

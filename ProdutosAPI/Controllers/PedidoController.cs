@@ -11,10 +11,10 @@ namespace ProdutosAPI.Controllers;
 public class PedidoController : ControllerBase
 {
 
-    private PedidoContext _context;
+    private ItemContext _context;
     private IMapper _mapper;
 
-    public PedidoController(PedidoContext context, IMapper mapper)
+    public PedidoController(ItemContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
