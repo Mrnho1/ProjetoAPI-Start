@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProdutosAPI.Data;
 
@@ -10,9 +11,11 @@ using ProdutosAPI.Data;
 namespace ProdutosAPI.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    partial class PedidoContextModelSnapshot : ModelSnapshot
+    [Migration("20230803014950_relacoes")]
+    partial class relacoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +27,7 @@ namespace ProdutosAPI.Migrations
 
             modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("clienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -36,17 +39,17 @@ namespace ProdutosAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("clienteId");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Item", b =>
                 {
-                    b.Property<int?>("pedidoId")
+                    b.Property<int?>("pedidoIdFk")
                         .HasColumnType("int");
 
-                    b.Property<int?>("produtoId")
+                    b.Property<int?>("produtoIdFk")
                         .HasColumnType("int");
 
                     b.Property<int>("qtd_pedido")
@@ -55,20 +58,20 @@ namespace ProdutosAPI.Migrations
                     b.Property<float>("valor_item")
                         .HasColumnType("float");
 
-                    b.HasKey("pedidoId", "produtoId");
+                    b.HasKey("pedidoIdFk", "produtoIdFk");
 
-                    b.HasIndex("produtoId");
+                    b.HasIndex("produtoIdFk");
 
                     b.ToTable("Items");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("pedidoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("clienteId")
+                    b.Property<int>("FkclienteId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("data_pedido")
@@ -77,16 +80,16 @@ namespace ProdutosAPI.Migrations
                     b.Property<float>("valor_total")
                         .HasColumnType("float");
 
-                    b.HasKey("id");
+                    b.HasKey("pedidoId");
 
-                    b.HasIndex("clienteId");
+                    b.HasIndex("FkclienteId");
 
                     b.ToTable("Pedidos");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Produto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("produtoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -102,7 +105,7 @@ namespace ProdutosAPI.Migrations
                     b.Property<float>("valor_produto")
                         .HasColumnType("float");
 
-                    b.HasKey("id");
+                    b.HasKey("produtoId");
 
                     b.ToTable("Produtos");
                 });
@@ -111,13 +114,13 @@ namespace ProdutosAPI.Migrations
                 {
                     b.HasOne("ProdutosAPI.Models.Pedido", "Pedido")
                         .WithMany("Item_Produtos")
-                        .HasForeignKey("pedidoId")
+                        .HasForeignKey("pedidoIdFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProdutosAPI.Models.Produto", "Produto")
                         .WithMany("Item_Produtos")
-                        .HasForeignKey("produtoId")
+                        .HasForeignKey("produtoIdFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -128,13 +131,13 @@ namespace ProdutosAPI.Migrations
 
             modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
                 {
-                    b.HasOne("ProdutosAPI.Models.Cliente", "Cliente")
+                    b.HasOne("ProdutosAPI.Models.Cliente", "Fk")
                         .WithMany("Pedidos")
-                        .HasForeignKey("clienteId")
+                        .HasForeignKey("FkclienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cliente");
+                    b.Navigation("Fk");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>

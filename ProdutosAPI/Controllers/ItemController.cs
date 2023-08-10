@@ -26,8 +26,8 @@ public class ItemController : ControllerBase
         Item item = _mapper.Map<Item>(itemDto);
         _context.Items.Add(item);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(GetItemById), new { pedidoId = item.pedidoId,
-            produtoId = item.produtoId
+        return CreatedAtAction(nameof(GetItemById), new { pedidoId = item.pedidoIdFk,
+            produtoId = item.produtoIdFk
         }, item);
     }
 
@@ -40,7 +40,7 @@ public class ItemController : ControllerBase
     [HttpGet("{filmeId}/{cinemaId}")]
     public IActionResult GetItemById(int produtoId, int pedidoId)
     {
-        Item item = _context.Items.FirstOrDefault(item => item.pedidoId == pedidoId && item.produtoId == produtoId);
+        Item item = _context.Items.FirstOrDefault(item => item.pedidoIdFk == pedidoId && item.produtoIdFk == produtoId);
         if (item != null)
         {
             ReadItemDto itemDto = _mapper.Map<ReadItemDto>(item);

@@ -26,7 +26,7 @@ public class ClienteController : ControllerBase
         _context.Clientes.Add(cliente);
         _context.SaveChanges();
         //essa linha padroniza o retorno do caminho do item criado no momento do POST
-        return CreatedAtAction(nameof(GetClienteById), new { id = cliente.id }, cliente);
+        return CreatedAtAction(nameof(GetClienteById), new { id = cliente.clienteId }, cliente);
     }
 
     [HttpGet]
@@ -38,7 +38,7 @@ public class ClienteController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetClienteById(int id)
     {
-        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.id == id);
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.clienteId == id);
         if (cliente == null) return NotFound();
         var clienteDto = _mapper.Map<ReadClienteDto>(cliente);
         return Ok(clienteDto);
@@ -47,7 +47,7 @@ public class ClienteController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdateCliente(int id, [FromBody] UpdateClienteDto clienteDto)
     {
-        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.id == id);
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.clienteId == id);
         if (cliente == null) return NotFound();
         _mapper.Map(clienteDto, cliente);
         _context.SaveChanges();
@@ -57,7 +57,7 @@ public class ClienteController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteCliente(int id)
     {
-        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.id == id);
+        var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.clienteId == id);
         if (cliente == null) return NotFound();
         _context.Remove(cliente);
         _context.SaveChanges();

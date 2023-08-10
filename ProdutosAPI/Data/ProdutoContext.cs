@@ -12,16 +12,16 @@ public class ItemContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<Item>()
-           .HasKey(item => new { item.pedidoId, item.produtoId });
+           .HasKey(item => new { item.pedidoIdFk, item.produtoIdFk });
         builder.Entity<Item>()
            .HasOne(item => item.Pedido)
            .WithMany(pedido => pedido.Item_Produtos)
-           .HasForeignKey(item => item.pedidoId);
+           .HasForeignKey(item => item.pedidoIdFk);
 
         builder.Entity<Item>()
             .HasOne(item => item.Produto)
             .WithMany(produto => produto.Item_Produtos)
-            .HasForeignKey(item => item.produtoId);
+            .HasForeignKey(item => item.produtoIdFk);
     }
 
     public DbSet<Produto> Produtos { get; set; }

@@ -2,7 +2,7 @@
 
 public class ReadClienteDto
 {
-    public int id { get; set; }
+    public int clienteId { get; set; }
     public string nome_cliente { get; set; }
     public string endereco_cliente { get; set; }
 }

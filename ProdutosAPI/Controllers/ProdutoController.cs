@@ -27,7 +27,7 @@ public class ProdutoController : ControllerBase
         _context.Produtos.Add(produto);
         _context.SaveChanges();
         //essa linha padroniza o retorno do caminho do item criado no momento do POST
-        return CreatedAtAction(nameof(GetProdutosById), new {id = produto.id}, produto);
+        return CreatedAtAction(nameof(GetProdutosById), new {id = produto.produtoId}, produto);
     }
 
     [HttpGet]
@@ -38,7 +38,7 @@ public class ProdutoController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetProdutosById(int id)
     {
-       var produto = _context.Produtos.FirstOrDefault(produto => produto.id == id);
+       var produto = _context.Produtos.FirstOrDefault(produto => produto.produtoId == id);
         if (produto == null) return NotFound();
         var produtoDto = _mapper.Map<ReadProdutoDto>(produto);
         return Ok(produtoDto);
@@ -47,7 +47,7 @@ public class ProdutoController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdateProduto(int id, [FromBody] UpdateProdutoDto produtoDto)
     {
-        var produto = _context.Produtos.FirstOrDefault(produto => produto.id == id);
+        var produto = _context.Produtos.FirstOrDefault(produto => produto.produtoId == id);
         if(produto == null) return NotFound();
         _mapper.Map(produtoDto, produto);
         _context.SaveChanges();
@@ -57,7 +57,7 @@ public class ProdutoController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeleteProduto(int id) 
     {
-        var produto = _context.Produtos.FirstOrDefault(produto => produto.id == id);
+        var produto = _context.Produtos.FirstOrDefault(produto => produto.produtoId == id);
         if(produto == null) return NotFound();
         _context.Remove(produto);
         _context.SaveChanges();

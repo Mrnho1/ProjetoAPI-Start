@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\source\\repos\\ProdutosAPI\\ProdutosAPI\\ProdutosAPI.csproj": {}
+    "C:\\Users\\lsmar\\OneDrive\\Área de Trabalho\\api\\ProjetoAPI-Start\\ProdutosAPI\\ProdutosAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\source\\repos\\ProdutosAPI\\ProdutosAPI\\ProdutosAPI.csproj": {
+    "C:\\Users\\lsmar\\OneDrive\\Área de Trabalho\\api\\ProjetoAPI-Start\\ProdutosAPI\\ProdutosAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\ProdutosAPI\\ProdutosAPI\\ProdutosAPI.csproj",
+        "projectUniqueName": "C:\\Users\\lsmar\\OneDrive\\Área de Trabalho\\api\\ProjetoAPI-Start\\ProdutosAPI\\ProdutosAPI.csproj",
         "projectName": "ProdutosAPI",
-        "projectPath": "C:\\Users\\USER\\source\\repos\\ProdutosAPI\\ProdutosAPI\\ProdutosAPI.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\source\\repos\\ProdutosAPI\\ProdutosAPI\\obj\\",
+        "projectPath": "C:\\Users\\lsmar\\OneDrive\\Área de Trabalho\\api\\ProjetoAPI-Start\\ProdutosAPI\\ProdutosAPI.csproj",
+        "packagesPath": "C:\\Users\\lsmar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lsmar\\OneDrive\\Área de Trabalho\\api\\ProjetoAPI-Start\\ProdutosAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lsmar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

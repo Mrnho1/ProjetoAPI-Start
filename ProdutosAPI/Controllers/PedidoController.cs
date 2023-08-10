@@ -27,7 +27,7 @@ public class PedidoController : ControllerBase
         _context.Pedidos.Add(pedido);
         _context.SaveChanges();
         //essa linha padroniza o retorno do caminho do item criado no momento do POST
-        return CreatedAtAction(nameof(GetPedidoById), new { id = pedido.id }, pedido);
+        return CreatedAtAction(nameof(GetPedidoById), new { id = pedido.pedidoId }, pedido);
     }
 
     [HttpGet]
@@ -39,7 +39,7 @@ public class PedidoController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetPedidoById(int id)
     {
-        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.id == id);
+        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.pedidoId == id);
         if (pedido == null) return NotFound();
         var pedidoDto = _mapper.Map<ReadPedidoDto>(pedido);
         return Ok(pedidoDto);
@@ -48,7 +48,7 @@ public class PedidoController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdatePeidido(int id, [FromBody] UpdatePedidoDto pedidoDto)
     {
-        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.id == id);
+        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.pedidoId == id);
         if (pedido == null) return NotFound();
         _mapper.Map(pedidoDto, pedido);
         _context.SaveChanges();
@@ -58,7 +58,7 @@ public class PedidoController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletePedido(int id)
     {
-        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.id == id);
+        var pedido = _context.Pedidos.FirstOrDefault(pedido => pedido.pedidoId == id);
         if (pedido == null) return NotFound();
         _context.Remove(pedido);
         _context.SaveChanges();

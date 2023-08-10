@@ -6,7 +6,7 @@ namespace ProdutosAPI.Models
     {
         [Key]
         [Required]
-        public int id{get; set;}
+        public int clienteId{get; set;}
 
         public string nome_cliente { get; set;}
 

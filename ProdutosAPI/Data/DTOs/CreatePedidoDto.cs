@@ -9,6 +9,6 @@ public class CreatePedidoDto
 
     public float valor_total { get; set; }
 
-    public int clienteId { get; set; }
+    public int clienteIdFk { get; set; }
 
 }

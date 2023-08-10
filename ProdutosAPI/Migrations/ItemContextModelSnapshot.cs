@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProdutosAPI.Data;
 
@@ -11,11 +10,9 @@ using ProdutosAPI.Data;
 namespace ProdutosAPI.Migrations
 {
     [DbContext(typeof(ItemContext))]
-    [Migration("20230727190925_Pedido Cliente")]
-    partial class PedidoCliente
+    partial class ItemContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +24,7 @@ namespace ProdutosAPI.Migrations
 
             modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("clienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -39,18 +36,39 @@ namespace ProdutosAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("id");
+                    b.HasKey("clienteId");
 
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("ProdutosAPI.Models.Item", b =>
+                {
+                    b.Property<int?>("pedidoIdFk")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("produtoIdFk")
+                        .HasColumnType("int");
+
+                    b.Property<int>("qtd_pedido")
+                        .HasColumnType("int");
+
+                    b.Property<float>("valor_item")
+                        .HasColumnType("float");
+
+                    b.HasKey("pedidoIdFk", "produtoIdFk");
+
+                    b.HasIndex("produtoIdFk");
+
+                    b.ToTable("Items");
+                });
+
             modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("pedidoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("clienteId")
+                    b.Property<int>("FkclienteId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("data_pedido")
@@ -59,16 +77,16 @@ namespace ProdutosAPI.Migrations
                     b.Property<float>("valor_total")
                         .HasColumnType("float");
 
-                    b.HasKey("id");
+                    b.HasKey("pedidoId");
 
-                    b.HasIndex("clienteId");
+                    b.HasIndex("FkclienteId");
 
                     b.ToTable("Pedidos");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Produto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("produtoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -84,25 +102,54 @@ namespace ProdutosAPI.Migrations
                     b.Property<float>("valor_produto")
                         .HasColumnType("float");
 
-                    b.HasKey("id");
+                    b.HasKey("produtoId");
 
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
+            modelBuilder.Entity("ProdutosAPI.Models.Item", b =>
                 {
-                    b.HasOne("ProdutosAPI.Models.Cliente", "Cliente")
-                        .WithMany("Pedidos")
-                        .HasForeignKey("clienteId")
+                    b.HasOne("ProdutosAPI.Models.Pedido", "Pedido")
+                        .WithMany("Item_Produtos")
+                        .HasForeignKey("pedidoIdFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cliente");
+                    b.HasOne("ProdutosAPI.Models.Produto", "Produto")
+                        .WithMany("Item_Produtos")
+                        .HasForeignKey("produtoIdFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
+                {
+                    b.HasOne("ProdutosAPI.Models.Cliente", "Fk")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("FkclienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Fk");
                 });
 
             modelBuilder.Entity("ProdutosAPI.Models.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Pedido", b =>
+                {
+                    b.Navigation("Item_Produtos");
+                });
+
+            modelBuilder.Entity("ProdutosAPI.Models.Produto", b =>
+                {
+                    b.Navigation("Item_Produtos");
                 });
 #pragma warning restore 612, 618
         }
